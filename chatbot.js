@@ -28,27 +28,34 @@ document.addEventListener("DOMContentLoaded", function() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // Hiển thị nút chọn giữa chat với robot hoặc chat trực tiếp khi trang được tải
     function showInitialOptions() {
-        const initialOptions = document.createElement('div');
-        initialOptions.className = 'chat-message bot';
-        initialOptions.innerHTML = `
-            <strong>Chatbot:</strong> Bạn muốn làm gì?
-            <div class="mt-2">
-                <button id="chat-with-robot" class="btn btn-primary mr-2">Chat với Robot</button>
-                <button id="chat-directly" class="btn btn-secondary">Chat Trực Tiếp</button>
-            </div>
-        `;
-        chatBox.appendChild(initialOptions);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        if (!document.getElementById('initial-options')) {
+            const initialOptions = document.createElement('div');
+            initialOptions.id = 'initial-options';
+            initialOptions.className = 'chat-message bot';
+            initialOptions.innerHTML = `
+                <strong>Chatbot:</strong> Bạn muốn làm gì?
+                <div class="mt-2">
+                    <button id="chat-with-robot" class="btn btn-primary mr-2">Chat với Robot</button>
+                    <button id="chat-directly" class="btn btn-secondary mr-2">Chat Trực Tiếp</button>
+                    <button id="buy-now" class="btn btn-success">Mua Hàng</button>
+                </div>
+            `;
+            chatBox.appendChild(initialOptions);
+            chatBox.scrollTop = chatBox.scrollHeight;
 
-        document.getElementById('chat-with-robot').addEventListener('click', function() {
-            addMessageToChatBox('Chatbot', 'Bạn đã chọn chat với robot. Hãy bắt đầu trò chuyện!', 'bot');
-        });
+            document.getElementById('chat-with-robot').addEventListener('click', function() {
+                addMessageToChatBox('Chatbot', 'Bạn đã chọn chat với robot. Hãy bắt đầu trò chuyện!', 'bot');
+            });
 
-        document.getElementById('chat-directly').addEventListener('click', function() {
-            window.location.href = 'https://m.me/cuidanang';
-        });
+            document.getElementById('chat-directly').addEventListener('click', function() {
+                window.open('https://m.me/cuidanang', '_blank');
+            });
+
+            document.getElementById('buy-now').addEventListener('click', function() {
+                showOrderForm();
+            });
+        }
     }
 
     showInitialOptions();

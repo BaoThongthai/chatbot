@@ -94,6 +94,13 @@ function sendSummaryMessage() {
     const shippingCost = document.getElementById('shipping-cost').value;
     const totalAmount = document.getElementById('total-amount').value;
 
+    // Lấy ngày hiện tại
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+    const year = currentDate.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+
     const summaryMessage = `
         <strong>Chatbot:</strong> Vui lòng xác nhận thông tin đơn hàng:
         <br><strong>Tên khách hàng:</strong> ${customerName}
@@ -105,6 +112,7 @@ function sendSummaryMessage() {
         <br><strong>Khoảng cách:</strong> ${shippingDistance} km
         <br><strong>Phí ship:</strong> ${shippingCost}
         <br><strong>Tổng:</strong> ${totalAmount}
+        <br><strong>Ngày đặt hàng:</strong> ${formattedDate}
         <br><button id="confirm-order" class="btn btn-success mt-2">Xác Nhận</button>
         <button id="cancel-order" class="btn btn-danger mt-2">Hủy</button>
     `;
@@ -117,7 +125,7 @@ function sendSummaryMessage() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     document.getElementById('confirm-order').addEventListener('click', function() {
-        confirmOrder();
+        confirmOrder(formattedDate);
     });
 
     document.getElementById('cancel-order').addEventListener('click', function() {
@@ -125,13 +133,57 @@ function sendSummaryMessage() {
     });
 }
 
-function confirmOrder() {
-    const chatBox = document.getElementById('chat-box');
-    const messageElement = document.createElement('div');
-    messageElement.className = 'chat-message bot';
-    messageElement.innerHTML = '<strong>Chatbot:</strong> Đơn hàng của bạn đã được xác nhận. Cảm ơn bạn đã mua hàng!';
-    chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
+function confirmOrder(orderDate) {
+    const customerName = document.getElementById('customer-name').value;
+    const phoneNumber = document.getElementById('phone-number').value;
+    const address = document.getElementById('address').value;
+    const quantity = document.getElementById('quantity').value;
+    const unitPrice = document.getElementById('unit-price').value;
+    const totalPrice = document.getElementById('total-price').value;
+    const shippingDistance = document.getElementById('shipping-fee').value;
+    const shippingCost = document.getElementById('shipping-cost').value;
+    const totalAmount = document.getElementById('total-amount').value;
+
+    const orderData = {
+        thongtin: {
+            customerName,
+            phoneNumber,
+            address,
+            quantity,
+            unitPrice,
+            totalPrice,
+            shippingDistance,
+            shippingCost,
+            totalAmount,
+            orderDate
+        }
+    };
+
+    fetch('https://667d1684297972455f6368a4.mockapi.io/cuidanang', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        const chatBox = document.getElementById('chat-box');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message bot';
+        messageElement.innerHTML = `<strong>Chatbot:</strong> Đơn hàng của bạn đã được xác nhận. Cảm ơn bạn đã mua hàng!`;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const chatBox = document.getElementById('chat-box');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message bot';
+        messageElement.innerHTML = `<strong>Chatbot:</strong> Đã có lỗi xảy ra, vui lòng thử lại sau.`;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
 }
 
 function cancelOrder() {

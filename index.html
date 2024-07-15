@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Simple Chatbot</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -12,7 +13,6 @@
         }
         .chat-container {
             max-width: 500px;
-            margin: 50px auto;
             padding: 0;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -56,14 +56,16 @@
         <div class="chat-input">
             <input type="text" id="chat-input" placeholder="Type a message..." class="form-control">
             <button class="btn btn-primary mt-2" id="send-button">Gửi tin nhắn</button>
+            <button class="btn btn-success mt-2" style="float: right;" id="buy-button">Mua Hàng</button>
         </div>
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="chatbot.js"></script>
     <script src="chatbot-response.js"></script>
     <script src="orderForm.js"></script>
-    <script src="chatbot.js"></script>
 </body>
 </html>

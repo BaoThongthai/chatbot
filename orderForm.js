@@ -1,4 +1,5 @@
 function showOrderForm() {
+
     const chatBox = document.getElementById('chat-box');
     
     if (!document.getElementById('order-form')) {

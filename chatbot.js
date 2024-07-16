@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
               <strong>Chatbot:</strong> Bạn muốn làm gì?
               <div class="mt-2">
                   <button id="chat-with-robot" class="btn btn-primary mr-2">Chat với Robot</button>
-                  <button id="chat-directly" class="btn btn-secondary mr-2">Chat Trực Tiếp</button>
+                  <button id="chat-directly"  style="float: right;" class="btn btn-secondary mr-2">Chat Trực Tiếp</button>
               </div>
           `;
           chatBox.appendChild(initialOptions);

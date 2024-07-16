@@ -27,14 +27,6 @@ function getChatbotResponse(userInput) {
         'Giá các loại củi trên như nhau ạ !'+
         '<br>Nhập [giá] để tham khảo giá'+'<br>Nhập [Ship] để biết tiền ship';
     }
-    else if (userInput.toLowerCase().includes('bán thế nào')) {
-        response = 'Bên mình bán củi dương liễu<br>' +
-            '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'
-            +'<img src="img/cuicaylon.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi miếng(hơn 2kg)<br>'
-            +'<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'
-        'Giá các loại củi trên như nhau ạ !'+
-        '<br>Nhập [giá] để tham khảo giá'+'<br>Nhập [Ship] để biết tiền ship';
-    }
     else if (userInput.toLowerCase().includes('muốn mua')) {
         response = 'Bên mình bán củi dương liễu<br>' +
             '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'
@@ -156,6 +148,12 @@ function getChatbotResponse(userInput) {
         'Giá các loại củi trên như nhau ạ !'+
         '<br>Nhập [giá] để tham khảo giá'+'<br>Nhập [Ship] để biết tiền ship';
     }
+    else if (userInput.toLowerCase().includes('củi bó bán')) {
+        response = 'Củi bó giá 11K<br>' +
+            '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'+
+        'Giá các loại củi trên như nhau ạ !'+
+        '<br>Nhập [giá] để tham khảo giá'+'<br>Nhập [Ship] để biết tiền ship';
+    }
     else if (userInput.toLowerCase().includes('tôi muốn mua củi bó')) {
         response = 'Củi bó giá 11.000VND<br>' +
             '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'+
@@ -166,7 +164,22 @@ function getChatbotResponse(userInput) {
             '<img src="img/cuicaylon.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi miếng(hơn 2kg)<br>'+
         '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
     }
-    else if (userInput.toLowerCase().includes('tôi muốn mua thanh tròn ')) {
+    else if (userInput.toLowerCase().includes('củi miếng bán')) {
+        response = 'Củi miếng 11.000VND<br>' +
+            '<img src="img/cuicaylon.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi miếng(hơn 2kg)<br>'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+    else if (userInput.toLowerCase().includes('tôi muốn mua củi thanh tròn ')) {
+        response = 'Củi cây tròn 11.000VND<br>' +
+            '<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+    else if (userInput.toLowerCase().includes('mua củi thanh tròn ')) {
+        response = 'Củi cây tròn 11.000VND<br>' +
+            '<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+    else if (userInput.toLowerCase().includes('củi thanh tròn bán ')) {
         response = 'Củi cây tròn 11.000VND<br>' +
             '<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'+
         '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
@@ -190,6 +203,24 @@ function getChatbotResponse(userInput) {
 
 
 
+    else if (userInput.toLowerCase().includes('muốn mua củi bó')) {
+        response = 'Củi bó giá 11.000VND<br>' +
+            '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+    else if (userInput.toLowerCase().includes('muốn mua củi miếng')) {
+        response = 'Củi miếng 11.000VND<br>' +
+            '<img src="img/cuicaylon.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi miếng(hơn 2kg)<br>'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+    else if (userInput.toLowerCase().includes('muốn mua củi thanh tròn ')) {
+        response = 'Củi cây tròn 11.000VND<br>' +
+            '<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'+
+        '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
+    }
+
+
+
     else if (userInput.toLowerCase().includes('mua củi bó')) {
         response = 'Củi bó giá 11.000VND<br>' +
             '<img src="img/cuibo.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi bó(hơn 2kg)<br>'+
@@ -200,7 +231,7 @@ function getChatbotResponse(userInput) {
             '<img src="img/cuicaylon.jpg" alt="Củi dương liễu" style="width:50%;">' +'<br>củi miếng(hơn 2kg)<br>'+
         '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
     }
-    else if (userInput.toLowerCase().includes('thanh tròn ')) {
+    else if (userInput.toLowerCase().includes('củi thanh tròn ')) {
         response = 'Củi cây tròn 11.000VND<br>' +
             '<img src="img/cuicaytron.jpg" alt="Củi dương liễu" style="width:50%;">' + '<br>'+ 'củi thanh tròn(hơn 2kg)'+
         '<br>Nhập [giá] để tham khảo giá các loại khác'+'<br>Nhập [Ship] để biết tiền ship';
@@ -240,26 +271,26 @@ function getChatbotResponse(userInput) {
     response = '<br> Giá 11.000VND/1 cây cho số lượng dưới 150 cây<br>' + 'Giá 10.000VND/1 cây cho số lượng trên 150 cây<br>' + 'Trên 200 cây giá 9700VND/cây ';
 }
     else if (userInput.toLowerCase().includes('trực tiếp')) {
-        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('tới')) {
-        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('địa chỉ')) {
-        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('nhà')) {
-        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br> Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     } else if (userInput.toLowerCase().includes('mua trực tiếp')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('mua')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('cần mua')) {
@@ -273,27 +304,27 @@ function getChatbotResponse(userInput) {
     }
     
     else if (userInput.toLowerCase().includes('ở đâu')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('số điện thoại')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('liên lạc')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('SĐT')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('phone')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('address')) {
-        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0934805005 giá mình trước 1 giờ. Cám ơn bạn';
+        response = '<br>Số 02 đường 2 tháng 9 ( sau lưng chùa Tĩnh Hội) . Tới liên hệ 0918366507 giá mình trước 1 giờ. Cám ơn bạn';
 
     }
     else if (userInput.toLowerCase().includes('tươi')) {

@@ -1,5 +1,4 @@
 function showOrderForm() {
-
     const chatBox = document.getElementById('chat-box');
     
     if (!document.getElementById('order-form')) {
@@ -46,6 +45,10 @@ function showOrderForm() {
                     <label for="total-amount">Tổng:</label>
                     <input type="text" id="total-amount" class="form-control" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="order-date">Ngày tạo đơn hàng:</label>
+                    <input type="text" id="order-date" class="form-control" readonly>
+                </div>
                 <button id="calculate" class="btn btn-primary mt-2">Tính Toán</button>
             </div>
         `;
@@ -59,26 +62,45 @@ function showOrderForm() {
 }
 
 function calculateOrder() {
-    const quantity = parseInt(document.getElementById('quantity').value);
-    const shippingDistance = parseInt(document.getElementById('shipping-fee').value);
+    const customerName = document.getElementById('customer-name').value;
+    const phoneNumber = document.getElementById('phone-number').value;
+    const address = document.getElementById('address').value;
+    const quantity = document.getElementById('quantity').value;
+    const shippingDistance = document.getElementById('shipping-fee').value;
+
+    if (!customerName || !phoneNumber || !address || !quantity || !shippingDistance) {
+        alert('Vui lòng điền đầy đủ thông tin.');
+        return;
+    }
+
+    if (!/^\d{10}$/.test(phoneNumber)) {
+        alert('Số điện thoại phải là 10 số.');
+        return;
+    }
+
+    const quantityNum = parseInt(quantity);
+    const shippingDistanceNum = parseInt(shippingDistance);
 
     let unitPrice = 0;
-    if (quantity <= 150) {
+    if (quantityNum <= 150) {
         unitPrice = 11000;
-    } else if (quantity <= 200) {
+    } else if (quantityNum <= 200) {
         unitPrice = 10000;
     } else {
         unitPrice = 9700;
     }
 
-    const totalPrice = quantity * unitPrice;
-    const shippingFee = shippingDistance <= 5 ? 100000 : 200000;
+    const totalPrice = quantityNum * unitPrice;
+    const shippingFee = shippingDistanceNum <= 5 ? 100000 : 200000;
     const totalAmount = totalPrice + shippingFee;
+
+    const orderDate = new Date().toLocaleDateString('vi-VN');
 
     document.getElementById('unit-price').value = unitPrice.toLocaleString('vi-VN') + ' VND';
     document.getElementById('total-price').value = totalPrice.toLocaleString('vi-VN') + ' VND';
     document.getElementById('shipping-cost').value = shippingFee.toLocaleString('vi-VN') + ' VND';
     document.getElementById('total-amount').value = totalAmount.toLocaleString('vi-VN') + ' VND';
+    document.getElementById('order-date').value = orderDate;
 
     // Gửi tin nhắn tổng hợp sau khi tính toán xong
     sendSummaryMessage();
@@ -94,6 +116,7 @@ function sendSummaryMessage() {
     const shippingDistance = document.getElementById('shipping-fee').value;
     const shippingCost = document.getElementById('shipping-cost').value;
     const totalAmount = document.getElementById('total-amount').value;
+    const orderDate = document.getElementById('order-date').value;
 
     const summaryMessage = `
         <strong>Chatbot:</strong> Vui lòng xác nhận thông tin đơn hàng:
@@ -106,6 +129,7 @@ function sendSummaryMessage() {
         <br><strong>Khoảng cách:</strong> ${shippingDistance} km
         <br><strong>Phí ship:</strong> ${shippingCost}
         <br><strong>Tổng:</strong> ${totalAmount}
+        <br><strong>Ngày tạo đơn hàng:</strong> ${orderDate}
         <br><button id="confirm-order" class="btn btn-success mt-2">Xác Nhận</button>
         <button id="cancel-order" class="btn btn-danger mt-2">Hủy</button>
     `;
@@ -127,12 +151,58 @@ function sendSummaryMessage() {
 }
 
 function confirmOrder() {
-    const chatBox = document.getElementById('chat-box');
-    const messageElement = document.createElement('div');
-    messageElement.className = 'chat-message bot';
-    messageElement.innerHTML = '<strong>Chatbot:</strong> Đơn hàng của bạn đã được xác nhận. Cảm ơn bạn đã mua hàng!';
-    chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    const customerName = document.getElementById('customer-name').value;
+    const phoneNumber = document.getElementById('phone-number').value;
+    const address = document.getElementById('address').value;
+    const quantity = document.getElementById('quantity').value;
+    const unitPrice = document.getElementById('unit-price').value;
+    const totalPrice = document.getElementById('total-price').value;
+    const shippingDistance = document.getElementById('shipping-fee').value;
+    const shippingCost = document.getElementById('shipping-cost').value;
+    const totalAmount = document.getElementById('total-amount').value;
+    const orderDate = document.getElementById('order-date').value;
+
+    const orderData = {
+        Thongtin: {
+            customerName,
+            phoneNumber,
+            address,
+            quantity,
+            unitPrice,
+            totalPrice,
+            shippingDistance,
+            shippingCost,
+            totalAmount,
+            orderDate
+        }
+    };
+
+    fetch('https://667d1684297972455f6368a4.mockapi.io/cuidanang', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        const chatBox = document.getElementById('chat-box');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message bot';
+        messageElement.innerHTML = '<strong>Chatbot:</strong> Đơn hàng của bạn đã được xác nhận và gửi đi. Cảm ơn bạn đã mua hàng!';
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        const chatBox = document.getElementById('chat-box');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message bot';
+        messageElement.innerHTML = '<strong>Chatbot:</strong> Đã xảy ra lỗi khi gửi đơn hàng của bạn. Vui lòng thử lại.';
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
 }
 
 function cancelOrder() {

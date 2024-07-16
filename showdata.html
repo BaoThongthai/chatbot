@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Information</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">DANH SÁCH ĐƠN HÀNG</h1>
+    <div class="container mt-5">
+        <div class="row" id="card-container">
+            <!-- Cards will be appended here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('https://667d1684297972455f6368a4.mockapi.io/cuidanang')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('card-container');
+                    data.forEach(item => {
+                        const info = item.Thongtin || item.thongtin; // Kiểm tra cả hai trường hợp tên trường
+
+                        if (info && info.orderDate) {
+                            const card = document.createElement('div');
+                            card.classList.add('col-md-4');
+                            card.innerHTML = `
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title">ID: ${item.id} - Ngày: ${info.orderDate}</h5>
+                    
+
+                  </div>
+                  <div class="card-body">
+                    <p><strong>Tên khách hàng:</strong> ${info.customerName}</p>
+                    <p><strong>Số điện thoại:</strong> ${info.phoneNumber}</p>
+                    <p><strong>Địa chỉ:</strong> ${info.address}</p>
+                    <p><strong>Số lượng:</strong> ${info.quantity}</p>
+                    <p><strong>Đơn giá:</strong> ${info.unitPrice}</p>
+                    <p><strong>Thành tiền:</strong> ${info.totalPrice}</p>
+                    <p><strong>Khoảng cách vận chuyển:</strong> ${info.shippingDistance} km</p>
+                    <p><strong>Phí vận chuyển:</strong> ${info.shippingCost}</p>
+                    <p><strong>Tổng cộng:</strong> ${info.totalAmount}</p>
+                    <button class="btn btn-danger btn-sm float-end" onclick="deleteCard(${item.id})">Xóa</button>
+                  </div>
+                </div>
+              `;
+                            container.appendChild(card);
+                        } else {
+                            console.error('Missing or invalid data for item:', item);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        function deleteCard(id) {
+            if (confirm('Bạn có chắc muốn xóa đơn hàng này không?')) {
+                fetch(`https://667d1684297972455f6368a4.mockapi.io/cuidanang/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(() => {
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error deleting card:', error));
+            }
+        }
+    </script>
+</body>
+
+</html>
